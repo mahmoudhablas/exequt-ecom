@@ -13,10 +13,10 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-
 public class ProductService {
-    private ProductRepository productRepository;
-    private ProductMapper productMapper;
+    private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
+
     public ProductResponse getProducts(Integer cursor, int limit) {
 
 
