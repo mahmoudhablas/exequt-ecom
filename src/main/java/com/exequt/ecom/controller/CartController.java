@@ -1,5 +1,6 @@
 package com.exequt.ecom.controller;
 
+import com.exequt.ecom.model.CartDetailsResponse;
 import com.exequt.ecom.model.CartRequest;
 import com.exequt.ecom.model.CartResponse;
 import com.exequt.ecom.model.ProductResponse;
@@ -16,18 +17,30 @@ public class CartController {
     private final CartService cartService;
 
     @PostMapping
-    public ResponseEntity<CartResponse> createCart(@RequestHeader ("X-User-Id") Long userId)
-   {
+    public ResponseEntity<CartResponse> createEmptyCart(@RequestHeader ("X-User-Id") Long userId)
+    {
        CartResponse cartResponse =  this.cartService.createEmptyCart(userId);
        return ResponseEntity.ok(cartResponse);
     }
-    @PostMapping("/{cartId}/items")
-    public ResponseEntity<CartResponse> addItems(
+    @PostMapping("/items")
+    public ResponseEntity<CartDetailsResponse> addItems(
             @RequestHeader ("X-User-Id") Long userId,
-            @PathVariable String cartId, @RequestBody CartRequest cartRequest){
-        CartResponse cartResponse =  this.cartService.addToCart(userId, cartRequest);
+             @RequestBody CartRequest cartRequest){
+        CartDetailsResponse cartResponse =  this.cartService.addToCart(userId, cartRequest);
         return ResponseEntity.ok(cartResponse);
     }
-
+    @PostMapping("/{cartId}/items")
+    public ResponseEntity<CartDetailsResponse> addItemsToExistingCart(
+            @RequestHeader ("X-User-Id") Long userId,
+            @PathVariable Long cartId,
+            @RequestBody CartRequest cartRequest){
+        CartDetailsResponse cartResponse =  this.cartService.addItemsToExistingCart(cartId, userId, cartRequest);
+        return ResponseEntity.ok(cartResponse);
+    }
+    @GetMapping("/{cartId}")
+    public ResponseEntity<CartDetailsResponse> viewCart(@PathVariable Long cartId,
+                                                        @RequestHeader ("X-User-Id") Long userId){
+        return ResponseEntity.ok(cartService.getCartDetails(userId));
+    }
 
 }

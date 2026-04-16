@@ -17,19 +17,19 @@ public class CartResponse
 {
     private Long cartId;
 
-    private Long customerId;
-
-    private String status;
-
-    private List<CartItemResponse> items;
-
-    private BigDecimal totalPrice;
-
-    private String currency;
-
-    private Integer totalItems;
-
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
+//    private Long customerId;
+//
+//    private String status;
+//
+//    private List<CartItemResponse> items;
+//
+//    private BigDecimal totalPrice;
+//
+//    private String currency;
+//
+//    private Integer totalItems;
+//
+//    private LocalDateTime createdAt;
+//
+//    private LocalDateTime updatedAt;
 }

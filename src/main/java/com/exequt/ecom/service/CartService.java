@@ -1,6 +1,7 @@
 package com.exequt.ecom.service;
 
 
+import com.exequt.ecom.mapper.CartMapper;
 import com.exequt.ecom.model.*;
 import com.exequt.ecom.repository.CartItemRepository;
 import com.exequt.ecom.repository.CartRepository;
@@ -21,6 +22,7 @@ public class CartService {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     private final CartItemRepository cartItemRepository;
+    private final CartMapper cartMapper;
 
 
     @Transactional
@@ -67,41 +69,79 @@ public class CartService {
     }
 
     @Transactional
-    public CartResponse addToCart(Long userId, CartRequest cartRequest) {
+    public CartDetailsResponse addToCart(Long userId, CartRequest cartRequest) {
+        // Validate customer exists
+        CustomerEntity customer = customerRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        // Find or create ACTIVE cart
+        CartEntity cart = cartRepository.findByCustomerIdAndStatus(userId, CartStatus.ACTIVE)
+                .orElseGet(() -> {
+                    CartEntity newCart = CartEntity.builder()
+                            .customer(customer)
+                            .status(CartStatus.ACTIVE)
+                            .build();
+                    return cartRepository.save(newCart);
+                });
+
+        addItemsToCart(cart, cartRequest);
+        return this.cartMapper.toCartDetailsResponse(cart);
+    }
+
+    @Transactional
+    public CartDetailsResponse addItemsToExistingCart(Long cartId, Long userId, CartRequest cartRequest) {
+        // Validate customer exists
+        CustomerEntity customer = customerRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        // Find the Cart by ID and ensure it belongs to the user and is ACTIVE
+        CartEntity cart = cartRepository.findById(cartId).orElseThrow(
+                () -> new RuntimeException("Cart not found")
+        );
+        if (!cart.getCustomer().getId().equals(userId)) {
+            throw new RuntimeException("Cart does not belong to the user");
+        }
+        if (cart.getStatus() != CartStatus.ACTIVE) {
+            throw new RuntimeException("Cart is not active");
+        }
+
+        addItemsToCart(cart, cartRequest);
+        return this.cartMapper.toCartDetailsResponse(cart);
+    }
+
+    public CartDetailsResponse getCartDetails(Long customerId) {
 
         CartEntity cart = cartRepository
-                .findByCustomerIdAndStatus(userId, CartStatus.ACTIVE)
-                .orElseThrow(() -> new RuntimeException("Failed to retrieve cart"));
+                .findByCustomerIdAndStatus(customerId, CartStatus.ACTIVE)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
 
-        cart = cartRepository.findWithLockById(cart.getId())
-                .orElseThrow();
+        return this.cartMapper.toCartDetailsResponse(cart);
+    }
 
+    private void addItemsToCart(CartEntity cart, CartRequest cartRequest) {
         for (CartItem reqItem : cartRequest.getItems()) {
-
             ProductEntity product = productRepository.findById(reqItem.getProductId())
-                    .orElseThrow();
-
+                    .orElseThrow(() -> new RuntimeException("Product not found: " + reqItem.getProductId()));
+            if (product.getNumberInStock() <= 0) {
+                throw new RuntimeException("Product out of stock: " + reqItem.getProductId());
+            }
             CartItemEntity item = cartItemRepository
-                    .findWithLockByCartIdAndProductId(cart.getId(), product.getId())
+                    .findByCartIdAndProductId(cart.getId(), product.getId().longValue())
                     .orElse(null);
 
             if (item != null) {
                 item.setQuantity(item.getQuantity() + reqItem.getQuantity());
             } else {
-                item = CartItem.builder()
+                item = CartItemEntity.builder()
                         .cart(cart)
                         .product(product)
                         .quantity(reqItem.getQuantity())
                         .unitPrice(product.getPrice())
                         .build();
             }
-
             cartItemRepository.save(item);
         }
-
-        cart.setUpdatedAt(LocalDateTime.now());
+        cart.setUpdatedAt(java.time.LocalDateTime.now());
         cartRepository.save(cart);
-
-        return CartMapper.toResponse(cart);
     }
-
+}
