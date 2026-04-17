@@ -1,5 +1,8 @@
-package com.exequt.ecom.model;
+package com.exequt.ecom.model.entity;
 
+import com.exequt.ecom.exception.CartNotActiveException;
+import com.exequt.ecom.exception.CartNotBelongCustomerException;
+import com.exequt.ecom.exception.EmptyCartCheckoutException;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -42,9 +45,32 @@ public class CartEntity {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemEntity> items;
 
+    @Version
+    private Long version;
+
     @PrePersist
     void onCreate() {
         this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void assertOwnership(Long userId) {
+        if (!this.customer.getId().equals(userId)) {
+            throw new CartNotBelongCustomerException(this.id, userId);
+        }
+    }
+
+    public void assertActive() {
+        if (this.status != CartStatus.ACTIVE) {
+            throw new CartNotActiveException(this.id);
+        }
+    }
+    public void checkout() {
+        assertActive();
+        if (this.items.isEmpty()) {
+            throw new EmptyCartCheckoutException(this.id);
+        }
+        this.status = CartStatus.CHECKED_OUT;
         this.updatedAt = LocalDateTime.now();
     }
 }

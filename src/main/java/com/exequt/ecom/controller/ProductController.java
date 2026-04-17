@@ -1,20 +1,17 @@
 package com.exequt.ecom.controller;
 
-import com.exequt.ecom.model.Product;
-import com.exequt.ecom.model.ProductResponse;
+import com.exequt.ecom.model.dto.ProductResponse;
 import com.exequt.ecom.service.ProductService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.web.PageableDefault;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("v1/products")
+@Slf4j
 public class ProductController {
 
       private final ProductService productService;
@@ -25,14 +22,18 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<ProductResponse> getProducts(
+            @RequestHeader("X-Correlation-Id") String correlationId,
             @RequestParam(required = false) Integer cursor,
             @RequestParam(defaultValue = "10") int limit
                 ) {
+        log.info("[getProducts] correlationId={}, cursor={}, limit={}", correlationId, cursor, limit);
         if (limit <= 0 || limit > 100) {
+            log.warn("[getProducts] Invalid limit: {}", limit);
             return ResponseEntity.badRequest().build();
         }
 
         ProductResponse response = productService.getProducts(cursor, limit);
+        log.info("[getProducts] Returned {} products", response.getProducts().size());
         return ResponseEntity.ok(response);
     }
 
