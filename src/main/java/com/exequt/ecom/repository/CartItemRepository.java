@@ -1,6 +1,6 @@
 package com.exequt.ecom.repository;
 
-import com.exequt.ecom.model.CartItemEntity;
+import com.exequt.ecom.model.entity.CartItemEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -145,16 +145,37 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(CartConcurrencyException.class)
+    public ResponseEntity<ErrorMessage> handleCartConcurrency(
+            CartConcurrencyException ex, HttpServletRequest request) {
+        return buildError(
+            ErrorCode.CART_CONCURRENCY,
+            ex.getMessage(),
+            HttpStatus.CONFLICT,
+            request
+        );
+    }
+
+    @ExceptionHandler(CartEmptyException.class)
+    public ResponseEntity<ErrorMessage> handleCartEmpty(
+            CartEmptyException ex,
+            HttpServletRequest request) {
+        return buildError(
+                ErrorCode.CART_EMPTY,
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST,
+                request
+        );
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessage> handleGeneric(
             Exception ex,
             HttpServletRequest request) {
-
         log.error("Unhandled exception occurred", ex);
-
         return buildError(
                 ErrorCode.INTERNAL_ERROR,
-                "Unexpected error occurred",
+                ex.getMessage() != null ? ex.getMessage() : "Unexpected error occurred",
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 request
         );
@@ -182,6 +203,5 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(error, status);
     }
-    // add the new methods for the other exceptions here
 
 }

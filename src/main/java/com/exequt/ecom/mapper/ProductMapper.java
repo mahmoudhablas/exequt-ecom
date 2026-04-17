@@ -1,8 +1,8 @@
 package com.exequt.ecom.mapper;
 
-import com.exequt.ecom.model.ProductEntity;
-import com.exequt.ecom.model.Product;
-import com.exequt.ecom.model.ProductResponse;
+import com.exequt.ecom.model.entity.ProductEntity;
+import com.exequt.ecom.model.dto.Product;
+import com.exequt.ecom.model.dto.ProductResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

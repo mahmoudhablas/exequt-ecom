@@ -1,4 +1,4 @@
-package com.exequt.ecom.model;
+package com.exequt.ecom.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

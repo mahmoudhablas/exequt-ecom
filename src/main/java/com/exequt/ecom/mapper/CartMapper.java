@@ -1,6 +1,10 @@
 package com.exequt.ecom.mapper;
 
-import com.exequt.ecom.model.*;
+import com.exequt.ecom.model.dto.CartDetailsResponse;
+import com.exequt.ecom.model.dto.CartItemDetailsResponse;
+import com.exequt.ecom.model.dto.CartResponse;
+import com.exequt.ecom.model.entity.CartEntity;
+import com.exequt.ecom.model.entity.CartItemEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

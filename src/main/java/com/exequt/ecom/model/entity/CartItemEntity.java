@@ -1,4 +1,4 @@
-package com.exequt.ecom.model;
+package com.exequt.ecom.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
