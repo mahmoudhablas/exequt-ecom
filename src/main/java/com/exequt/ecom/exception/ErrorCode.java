@@ -1,0 +1,17 @@
+package com.exequt.ecom.exception;
+
+public enum ErrorCode {
+
+    CART_NOT_FOUND,
+    PRODUCT_NOT_FOUND,
+    VALIDATION_ERROR,
+    BAD_REQUEST,
+    INTERNAL_ERROR,
+    CART_NOT_ACTIVE,
+    CUSTOMER_NOT_FOUND,
+    CART_ITEM_NOT_FOUND,
+    PRODUCT_OUT_OF_STOCK,
+    DUPLICATE_CART_ITEM,
+    CART_ACCESS_DENIED
+
+}
