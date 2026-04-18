@@ -10,12 +10,7 @@ import java.util.Optional;
 @Repository
 public interface PaymentRepository extends JpaRepository<PaymentEntity, Long> {
 
-    Optional<PaymentEntity> findByOrderId(Long orderId);
-
     // Idempotency check — avoid duplicate payments for same provider transaction
     Optional<PaymentEntity> findByProviderAndProviderRef(String provider, String providerRef);
 
-    boolean existsByProviderAndProviderRef(String provider, String providerRef);
-
-    List<PaymentEntity> findByStatus(PaymentStatus status);
 }

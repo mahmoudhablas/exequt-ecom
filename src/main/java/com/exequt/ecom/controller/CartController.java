@@ -1,9 +1,6 @@
 package com.exequt.ecom.controller;
 
-import com.exequt.ecom.model.dto.CartDetailsResponse;
-import com.exequt.ecom.model.dto.CartRequest;
-import com.exequt.ecom.model.dto.CartResponse;
-import com.exequt.ecom.model.dto.CheckoutResponse;
+import com.exequt.ecom.model.dto.*;
 import com.exequt.ecom.service.CartService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +19,10 @@ public class CartController {
     private final CartService cartService;
 
     @PostMapping
-    public ResponseEntity<CartResponse> createEmptyCart(@RequestHeader ("X-User-Id") Long userId) {
-        log.info("[createEmptyCart] userId={}", userId);
+    public ResponseEntity<CartResponse> createEmptyCart(
+            @RequestHeader ("X-Correlation-Id") String correlationId,
+            @RequestHeader ("X-User-Id") Long userId) {
+        log.info("[createEmptyCart] userId={}, correlationId={}", userId, correlationId);
         CartResponse cartResponse = this.cartService.createEmptyCart(userId);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{cartId}")
@@ -77,9 +76,10 @@ public class CartController {
     public ResponseEntity<CheckoutResponse> checkout(
             @RequestHeader ("X-User-Id") Long userId,
             @RequestHeader ("X-Correlation-Id") String correlationId,
-            @PathVariable Long cartId) throws Exception {
+            @PathVariable Long cartId,
+            @RequestBody CheckoutRequest checkoutRequest) throws Exception {
         log.info("[checkout] userId={}, cartId={}, correlationId={}", userId, cartId, correlationId);
-        CheckoutResponse response = this.cartService.checkoutCart(cartId, userId);
+        CheckoutResponse response = this.cartService.checkoutCart(cartId, userId, checkoutRequest);
         log.info("[checkout] Checkout completed for cartId={}, orderId={}", cartId, response.getOrderId());
         return ResponseEntity.ok(response);
     }

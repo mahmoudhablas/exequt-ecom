@@ -31,7 +31,7 @@ public class CartEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private CartStatus status = CartStatus.ACTIVE;
+    private CartStatus status;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -46,6 +46,7 @@ public class CartEntity {
     private List<CartItemEntity> items;
 
     @Version
+    @Column(nullable = false)
     private Long version;
 
     @PrePersist

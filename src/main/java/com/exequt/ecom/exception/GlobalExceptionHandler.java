@@ -181,6 +181,30 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(UnknowPaymentFailureException.class)
+    public ResponseEntity<ErrorMessage> handleUnknowPaymentFailure(
+            UnknowPaymentFailureException ex,
+            HttpServletRequest request) {
+        return buildError(
+                ErrorCode.PAYMENT_UNKNOWN_FAILURE,
+                ex.getMessage(),
+                HttpStatus.GATEWAY_TIMEOUT,
+                request
+        );
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ErrorMessage> handleOrderNotFound(
+            OrderNotFoundException ex,
+            HttpServletRequest request) {
+        return buildError(
+                ErrorCode.ORDER_NOT_FOUND,
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND,
+                request
+        );
+    }
+
     private ResponseEntity<ErrorMessage> buildError(
             ErrorCode code,
             String message,

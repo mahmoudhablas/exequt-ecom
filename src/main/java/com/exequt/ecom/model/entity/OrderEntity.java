@@ -45,8 +45,8 @@ public class OrderEntity {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
 
-    // JSONB column — stored as String, deserialized in service layer
-    @Column(name = "shipping_addr", nullable = false, columnDefinition = "jsonb")
+
+    @Column(name = "shipping_addr", nullable = false)
     private String shippingAddr;
 
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -59,14 +59,15 @@ public class OrderEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.LAZY)
-    private List<OrderItemEntity> items = new ArrayList<>();
+    private List<OrderItemEntity> items;
 
-    @OneToOne(mappedBy = "order",
+    @OneToMany(mappedBy = "order",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private PaymentEntity payment;
+    private List<PaymentEntity> payments;
 
     @Version
+    @Column(nullable = false)
     private Long version;
 
     @PrePersist
