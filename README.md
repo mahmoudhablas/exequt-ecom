@@ -44,6 +44,9 @@ The system is designed with a focus on **data consistency, concurrency handling,
 ![Sequence Diagram](sequence-diagram.png)
 ### 🔄 State Machine
 ![State Machine](cart_order_payment_state_machine.svg)
+### 🗄️ Data Model
+![ERD](erd.svg)
+
 ---
 
 ## 🔄 Business Flow
@@ -122,6 +125,7 @@ This will start:
 
 * Application
 * Database
+* PgAdmin: You can view the Database table from PgAdmin client, it will be accessible at `localhost:50550` with username `admin@example.com` and password `admin`.
 
 
 ---
@@ -211,7 +215,7 @@ Failed or timeout payments do not corrupt order state.
 ---
 
 ## 🚧 Future Improvements
-
+* Include the Refund flow
 * Introduce Kafka for event-driven architecture
 * Implement Saga pattern for order-payment coordination
 * Add Redis caching

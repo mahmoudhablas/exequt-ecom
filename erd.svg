@@ -1,0 +1,336 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" style="background:#ffffff;font-family:Arial,sans-serif;">
+ 
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#4a90d9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+ 
+  <!-- ─── TITLE ─── -->
+  <text x="600" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#1a1a1a">E-Commerce Database ERD</text>
+  <line x1="40" y1="50" x2="1160" y2="50" stroke="#e0e0e0" stroke-width="1"/>
+ 
+  <!-- ════════════════════════════════════════════ -->
+  <!--  CUSTOMERS  (top-left)                      -->
+  <!-- ════════════════════════════════════════════ -->
+  <g id="customers">
+    <!-- header -->
+    <rect x="40" y="70" width="200" height="34" rx="6" ry="6" fill="#1d6fa4"/>
+    <text x="140" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">customers</text>
+    <!-- body -->
+    <rect x="40" y="104" width="200" height="178" rx="0" ry="0" fill="#f0f7ff" stroke="#1d6fa4" stroke-width="1.5"/>
+    <rect x="40" y="104" width="200" height="1.5" fill="#1d6fa4"/>
+    <!-- PK row -->
+    <rect x="40" y="104" width="200" height="26" fill="#dbeeff"/>
+    <text x="52" y="121" font-size="11" font-weight="700" fill="#1d6fa4">PK</text>
+    <text x="80" y="121" font-size="11" fill="#1a1a1a">id</text>
+    <text x="235" y="121" text-anchor="end" font-size="10" fill="#555">BIGSERIAL</text>
+    <!-- rows -->
+    <line x1="40" y1="130" x2="240" y2="130" stroke="#c8dff5" stroke-width="0.8"/>
+    <text x="80" y="146" font-size="11" fill="#1a1a1a">email</text>
+    <text x="235" y="146" text-anchor="end" font-size="10" fill="#555">VARCHAR(255)</text>
+    <line x1="40" y1="152" x2="240" y2="152" stroke="#c8dff5" stroke-width="0.8"/>
+    <text x="80" y="168" font-size="11" fill="#1a1a1a">full_name</text>
+    <text x="235" y="168" text-anchor="end" font-size="10" fill="#555">VARCHAR(255)</text>
+    <line x1="40" y1="174" x2="240" y2="174" stroke="#c8dff5" stroke-width="0.8"/>
+    <text x="80" y="190" font-size="11" fill="#1a1a1a">phone</text>
+    <text x="235" y="190" text-anchor="end" font-size="10" fill="#555">VARCHAR(50)</text>
+    <line x1="40" y1="196" x2="240" y2="196" stroke="#c8dff5" stroke-width="0.8"/>
+    <text x="80" y="212" font-size="11" fill="#1a1a1a">created_at</text>
+    <text x="235" y="212" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <line x1="40" y1="218" x2="240" y2="218" stroke="#c8dff5" stroke-width="0.8"/>
+    <text x="80" y="234" font-size="11" fill="#1a1a1a">updated_at</text>
+    <text x="235" y="234" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <!-- border -->
+    <rect x="40" y="70" width="200" height="212" rx="6" ry="6" fill="none" stroke="#1d6fa4" stroke-width="1.5"/>
+  </g>
+ 
+  <!-- ════════════════════════════════════════════ -->
+  <!--  PRODUCTS  (top-right)                      -->
+  <!-- ════════════════════════════════════════════ -->
+  <g id="products">
+    <rect x="960" y="70" width="200" height="34" rx="6" ry="6" fill="#2e7d32"/>
+    <text x="1060" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">products</text>
+    <rect x="960" y="104" width="200" height="204" rx="0" ry="0" fill="#f1faf1" stroke="#2e7d32" stroke-width="1.5"/>
+    <rect x="960" y="104" width="200" height="1.5" fill="#2e7d32"/>
+    <!-- PK -->
+    <rect x="960" y="104" width="200" height="26" fill="#d4edda"/>
+    <text x="972" y="121" font-size="11" font-weight="700" fill="#2e7d32">PK</text>
+    <text x="1000" y="121" font-size="11" fill="#1a1a1a">id</text>
+    <text x="1155" y="121" text-anchor="end" font-size="10" fill="#555">BIGSERIAL</text>
+    <!-- rows -->
+    <line x1="960" y1="130" x2="1160" y2="130" stroke="#b8ddbf" stroke-width="0.8"/>
+    <text x="1155" y="146" text-anchor="end" font-size="10" fill="#555">VARCHAR(100)</text>
+    <line x1="960" y1="152" x2="1160" y2="152" stroke="#b8ddbf" stroke-width="0.8"/>
+    <text x="1000" y="168" font-size="11" fill="#1a1a1a">name</text>
+    <text x="1155" y="168" text-anchor="end" font-size="10" fill="#555">VARCHAR(255)</text>
+    <line x1="960" y1="174" x2="1160" y2="174" stroke="#b8ddbf" stroke-width="0.8"/>
+    <text x="1000" y="190" font-size="11" fill="#1a1a1a">description</text>
+    <text x="1155" y="190" text-anchor="end" font-size="10" fill="#555">TEXT</text>
+    <line x1="960" y1="196" x2="1160" y2="196" stroke="#b8ddbf" stroke-width="0.8"/>
+    <text x="1000" y="212" font-size="11" fill="#1a1a1a">price</text>
+    <text x="1155" y="212" text-anchor="end" font-size="10" fill="#555">DECIMAL(10,2)</text>
+    <line x1="960" y1="218" x2="1160" y2="218" stroke="#b8ddbf" stroke-width="0.8"/>
+    <text x="1000" y="234" font-size="11" fill="#1a1a1a">stock_qty</text>
+    <text x="1155" y="234" text-anchor="end" font-size="10" fill="#555">INT</text>
+    <line x1="960" y1="240" x2="1160" y2="240" stroke="#b8ddbf" stroke-width="0.8"/>
+    <text x="1000" y="256" font-size="11" fill="#1a1a1a">is_active</text>
+    <text x="1155" y="256" text-anchor="end" font-size="10" fill="#555">BOOLEAN</text>
+    <line x1="960" y1="262" x2="1160" y2="262" stroke="#b8ddbf" stroke-width="0.8"/>
+    <text x="1000" y="278" font-size="11" fill="#1a1a1a">created_at</text>
+    <text x="1155" y="278" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <rect x="960" y="70" width="200" height="238" rx="6" ry="6" fill="none" stroke="#2e7d32" stroke-width="1.5"/>
+  </g>
+ 
+  <!-- ════════════════════════════════════════════ -->
+  <!--  CARTS  (center-left)                       -->
+  <!-- ════════════════════════════════════════════ -->
+  <g id="carts">
+    <rect x="40" y="360" width="200" height="34" rx="6" ry="6" fill="#1d6fa4"/>
+    <text x="140" y="382" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">carts</text>
+    <rect x="40" y="394" width="200" height="178" rx="0" ry="0" fill="#f0f7ff" stroke="#1d6fa4" stroke-width="1.5"/>
+    <rect x="40" y="394" width="200" height="1.5" fill="#1d6fa4"/>
+    <!-- PK -->
+    <rect x="40" y="394" width="200" height="26" fill="#dbeeff"/>
+    <text x="52" y="411" font-size="11" font-weight="700" fill="#1d6fa4">PK</text>
+    <text x="80" y="411" font-size="11" fill="#1a1a1a">id</text>
+    <text x="235" y="411" text-anchor="end" font-size="10" fill="#555">BIGSERIAL</text>
+    <!-- FK -->
+    <line x1="40" y1="420" x2="240" y2="420" stroke="#c8dff5" stroke-width="0.8"/>
+    <rect x="40" y="420" width="200" height="26" fill="#fff8e1"/>
+    <text x="52" y="437" font-size="11" font-weight="700" fill="#e07b00">FK</text>
+    <text x="80" y="437" font-size="11" fill="#1a1a1a">customer_id</text>
+    <text x="235" y="437" text-anchor="end" font-size="10" fill="#555">BIGINT</text>
+    <!-- rows -->
+    <line x1="40" y1="446" x2="240" y2="446" stroke="#c8dff5" stroke-width="0.8"/>
+    <text x="80" y="462" font-size="11" fill="#1a1a1a">status</text>
+    <text x="235" y="462" text-anchor="end" font-size="10" fill="#555">cart_status</text>
+    <line x1="40" y1="468" x2="240" y2="468" stroke="#c8dff5" stroke-width="0.8"/>
+    <text x="80" y="484" font-size="11" fill="#1a1a1a">expires_at</text>
+    <text x="235" y="484" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <line x1="40" y1="490" x2="240" y2="490" stroke="#c8dff5" stroke-width="0.8"/>
+    <text x="80" y="506" font-size="11" fill="#1a1a1a">created_at</text>
+    <text x="235" y="506" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <line x1="40" y1="512" x2="240" y2="512" stroke="#c8dff5" stroke-width="0.8"/>
+    <text x="80" y="528" font-size="11" fill="#1a1a1a">updated_at</text>
+    <text x="235" y="528" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <rect x="40" y="360" width="200" height="212" rx="6" ry="6" fill="none" stroke="#1d6fa4" stroke-width="1.5"/>
+  </g>
+ 
+  <!-- ════════════════════════════════════════════ -->
+  <!--  CART_ITEMS  (center)                       -->
+  <!-- ════════════════════════════════════════════ -->
+  <g id="cart_items">
+    <rect x="480" y="360" width="200" height="34" rx="6" ry="6" fill="#6a1b9a"/>
+    <text x="580" y="382" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">cart_items</text>
+    <rect x="480" y="394" width="200" height="204" rx="0" ry="0" fill="#faf0ff" stroke="#6a1b9a" stroke-width="1.5"/>
+    <rect x="480" y="394" width="200" height="1.5" fill="#6a1b9a"/>
+    <!-- PK -->
+    <rect x="480" y="394" width="200" height="26" fill="#ede0ff"/>
+    <text x="492" y="411" font-size="11" font-weight="700" fill="#6a1b9a">PK</text>
+    <text x="520" y="411" font-size="11" fill="#1a1a1a">id</text>
+    <text x="675" y="411" text-anchor="end" font-size="10" fill="#555">BIGSERIAL</text>
+    <!-- FK cart_id -->
+    <line x1="480" y1="420" x2="680" y2="420" stroke="#d9b8ff" stroke-width="0.8"/>
+    <rect x="480" y="420" width="200" height="26" fill="#fff8e1"/>
+    <text x="492" y="437" font-size="11" font-weight="700" fill="#e07b00">FK</text>
+    <text x="520" y="437" font-size="11" fill="#1a1a1a">cart_id</text>
+    <text x="675" y="437" text-anchor="end" font-size="10" fill="#555">BIGINT</text>
+    <!-- FK product_id -->
+    <line x1="480" y1="446" x2="680" y2="446" stroke="#d9b8ff" stroke-width="0.8"/>
+    <rect x="480" y="446" width="200" height="26" fill="#fff8e1"/>
+    <text x="492" y="463" font-size="11" font-weight="700" fill="#e07b00">FK</text>
+    <text x="520" y="463" font-size="11" fill="#1a1a1a">product_id</text>
+    <text x="675" y="463" text-anchor="end" font-size="10" fill="#555">BIGINT</text>
+    <!-- rows -->
+    <line x1="480" y1="472" x2="680" y2="472" stroke="#d9b8ff" stroke-width="0.8"/>
+    <text x="520" y="488" font-size="11" fill="#1a1a1a">quantity</text>
+    <text x="675" y="488" text-anchor="end" font-size="10" fill="#555">INT</text>
+    <line x1="480" y1="494" x2="680" y2="494" stroke="#d9b8ff" stroke-width="0.8"/>
+    <text x="520" y="510" font-size="11" fill="#1a1a1a">unit_price</text>
+    <text x="675" y="510" text-anchor="end" font-size="10" fill="#555">DECIMAL(10,2)</text>
+    <line x1="480" y1="516" x2="680" y2="516" stroke="#d9b8ff" stroke-width="0.8"/>
+    <text x="520" y="532" font-size="11" fill="#1a1a1a">added_at</text>
+    <text x="675" y="532" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <line x1="480" y1="538" x2="680" y2="538" stroke="#d9b8ff" stroke-width="0.8"/>
+    <text x="520" y="554" font-size="11" fill="#1a1a1a">updated_at</text>
+    <text x="675" y="554" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <rect x="480" y="360" width="200" height="238" rx="6" ry="6" fill="none" stroke="#6a1b9a" stroke-width="1.5"/>
+  </g>
+ 
+  <!-- ════════════════════════════════════════════ -->
+  <!--  ORDERS  (center)                           -->
+  <!-- ════════════════════════════════════════════ -->
+  <g id="orders">
+    <rect x="480" y="650" width="200" height="34" rx="6" ry="6" fill="#b71c1c"/>
+    <text x="580" y="672" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">orders</text>
+    <rect x="480" y="684" width="200" height="230" rx="0" ry="0" fill="#fff5f5" stroke="#b71c1c" stroke-width="1.5"/>
+    <rect x="480" y="684" width="200" height="1.5" fill="#b71c1c"/>
+    <!-- PK -->
+    <rect x="480" y="684" width="200" height="26" fill="#ffd7d7"/>
+    <text x="492" y="701" font-size="11" font-weight="700" fill="#b71c1c">PK</text>
+    <text x="520" y="701" font-size="11" fill="#1a1a1a">id</text>
+    <text x="675" y="701" text-anchor="end" font-size="10" fill="#555">BIGSERIAL</text>
+    <!-- FKs -->
+    <line x1="480" y1="710" x2="680" y2="710" stroke="#ffb3b3" stroke-width="0.8"/>
+    <rect x="480" y="710" width="200" height="26" fill="#fff8e1"/>
+    <text x="492" y="727" font-size="11" font-weight="700" fill="#e07b00">FK</text>
+    <text x="520" y="727" font-size="11" fill="#1a1a1a">customer_id</text>
+    <text x="675" y="727" text-anchor="end" font-size="10" fill="#555">BIGINT</text>
+    <line x1="480" y1="736" x2="680" y2="736" stroke="#ffb3b3" stroke-width="0.8"/>
+    <rect x="480" y="736" width="200" height="26" fill="#fff8e1"/>
+    <text x="492" y="753" font-size="11" font-weight="700" fill="#e07b00">FK</text>
+    <text x="520" y="753" font-size="11" fill="#1a1a1a">cart_id</text>
+    <text x="675" y="753" text-anchor="end" font-size="10" fill="#555">BIGINT</text>
+    <!-- rows -->
+    <line x1="480" y1="762" x2="680" y2="762" stroke="#ffb3b3" stroke-width="0.8"/>
+    <text x="520" y="778" font-size="11" fill="#1a1a1a">status</text>
+    <text x="675" y="778" text-anchor="end" font-size="10" fill="#555">order_status</text>
+    <line x1="480" y1="784" x2="680" y2="784" stroke="#ffb3b3" stroke-width="0.8"/>
+    <text x="520" y="800" font-size="11" fill="#1a1a1a">subtotal</text>
+    <text x="675" y="800" text-anchor="end" font-size="10" fill="#555">DECIMAL(10,2)</text>
+    <line x1="480" y1="806" x2="680" y2="806" stroke="#ffb3b3" stroke-width="0.8"/>
+    <text x="520" y="822" font-size="11" fill="#1a1a1a">tax</text>
+    <text x="675" y="822" text-anchor="end" font-size="10" fill="#555">DECIMAL(10,2)</text>
+    <line x1="480" y1="828" x2="680" y2="828" stroke="#ffb3b3" stroke-width="0.8"/>
+    <text x="520" y="844" font-size="11" fill="#1a1a1a">total</text>
+    <text x="675" y="844" text-anchor="end" font-size="10" fill="#555">DECIMAL(10,2)</text>
+    <line x1="480" y1="850" x2="680" y2="850" stroke="#ffb3b3" stroke-width="0.8"/>
+    <text x="520" y="866" font-size="11" fill="#1a1a1a">shipping_addr</text>
+    <text x="675" y="866" text-anchor="end" font-size="10" fill="#555">VARCHAR(2</text>
+    <line x1="480" y1="872" x2="680" y2="872" stroke="#ffb3b3" stroke-width="0.8"/>
+    <text x="520" y="888" font-size="11" fill="#1a1a1a">created_at</text>
+    <text x="675" y="888" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <rect x="480" y="650" width="200" height="264" rx="6" ry="6" fill="none" stroke="#b71c1c" stroke-width="1.5"/>
+  </g>
+ 
+  <!-- ════════════════════════════════════════════ -->
+  <!--  ORDER_ITEMS  (right)                       -->
+  <!-- ════════════════════════════════════════════ -->
+  <g id="order_items">
+    <rect x="760" y="650" width="200" height="34" rx="6" ry="6" fill="#e65100"/>
+    <text x="860" y="672" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">order_items</text>
+    <rect x="760" y="684" width="200" height="230" rx="0" ry="0" fill="#fff8f3" stroke="#e65100" stroke-width="1.5"/>
+    <rect x="760" y="684" width="200" height="1.5" fill="#e65100"/>
+    <!-- PK -->
+    <rect x="760" y="684" width="200" height="26" fill="#ffd9b8"/>
+    <text x="772" y="701" font-size="11" font-weight="700" fill="#e65100">PK</text>
+    <text x="800" y="701" font-size="11" fill="#1a1a1a">id</text>
+    <text x="955" y="701" text-anchor="end" font-size="10" fill="#555">BIGSERIAL</text>
+    <!-- FKs -->
+    <line x1="760" y1="710" x2="960" y2="710" stroke="#ffcba0" stroke-width="0.8"/>
+    <rect x="760" y="710" width="200" height="26" fill="#fff8e1"/>
+    <text x="772" y="727" font-size="11" font-weight="700" fill="#e07b00">FK</text>
+    <text x="800" y="727" font-size="11" fill="#1a1a1a">order_id</text>
+    <text x="955" y="727" text-anchor="end" font-size="10" fill="#555">BIGINT</text>
+    <line x1="760" y1="736" x2="960" y2="736" stroke="#ffcba0" stroke-width="0.8"/>
+    <rect x="760" y="736" width="200" height="26" fill="#fff8e1"/>
+    <text x="772" y="753" font-size="11" font-weight="700" fill="#e07b00">FK</text>
+    <text x="800" y="753" font-size="11" fill="#1a1a1a">product_id</text>
+    <text x="955" y="753" text-anchor="end" font-size="10" fill="#555">BIGINT</text>
+    <!-- rows -->
+    <line x1="760" y1="762" x2="960" y2="762" stroke="#ffcba0" stroke-width="0.8"/>
+    <text x="800" y="778" font-size="11" fill="#1a1a1a">product_name</text>
+    <text x="955" y="778" text-anchor="end" font-size="10" fill="#555">VARCHAR(255)</text>
+    <line x1="760" y1="784" x2="960" y2="784" stroke="#ffcba0" stroke-width="0.8"/>
+    <text x="800" y="800" font-size="11" fill="#1a1a1a">unit_price</text>
+    <text x="955" y="800" text-anchor="end" font-size="10" fill="#555">DECIMAL(10,2)</text>
+    <line x1="760" y1="806" x2="960" y2="806" stroke="#ffcba0" stroke-width="0.8"/>
+    <text x="800" y="822" font-size="11" fill="#1a1a1a">quantity</text>
+    <text x="955" y="822" text-anchor="end" font-size="10" fill="#555">INT</text>
+    <line x1="760" y1="828" x2="960" y2="828" stroke="#ffcba0" stroke-width="0.8"/>
+    <text x="800" y="844" font-size="11" fill="#1a1a1a">subtotal</text>
+    <text x="955" y="844" text-anchor="end" font-size="10" fill="#555">DECIMAL(10,2)</text>
+    <rect x="760" y="650" width="200" height="264" rx="6" ry="6" fill="none" stroke="#e65100" stroke-width="1.5"/>
+  </g>
+ 
+  <!-- ════════════════════════════════════════════ -->
+  <!--  PAYMENTS  (far right bottom)               -->
+  <!-- ════════════════════════════════════════════ -->
+  <g id="payments">
+    <rect x="960" y="360" width="200" height="34" rx="6" ry="6" fill="#00695c"/>
+    <text x="1060" y="382" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">payments</text>
+    <rect x="960" y="394" width="200" height="256" rx="0" ry="0" fill="#f0faf8" stroke="#00695c" stroke-width="1.5"/>
+    <rect x="960" y="394" width="200" height="1.5" fill="#00695c"/>
+    <!-- PK -->
+    <rect x="960" y="394" width="200" height="26" fill="#b2dfdb"/>
+    <text x="972" y="411" font-size="11" font-weight="700" fill="#00695c">PK</text>
+    <text x="1000" y="411" font-size="11" fill="#1a1a1a">id</text>
+    <text x="1155" y="411" text-anchor="end" font-size="10" fill="#555">BIGSERIAL</text>
+    <!-- FK -->
+    <line x1="960" y1="420" x2="1160" y2="420" stroke="#80cbc4" stroke-width="0.8"/>
+    <rect x="960" y="420" width="200" height="26" fill="#fff8e1"/>
+    <text x="972" y="437" font-size="11" font-weight="700" fill="#e07b00">FK</text>
+    <text x="1000" y="437" font-size="11" fill="#1a1a1a">order_id</text>
+    <text x="1155" y="437" text-anchor="end" font-size="10" fill="#555">BIGINT</text>
+    <!-- rows -->
+    <line x1="960" y1="446" x2="1160" y2="446" stroke="#80cbc4" stroke-width="0.8"/>
+    <text x="1000" y="462" font-size="11" fill="#1a1a1a">provider</text>
+    <text x="1155" y="462" text-anchor="end" font-size="10" fill="#555">VARCHAR(50)</text>
+    <line x1="960" y1="468" x2="1160" y2="468" stroke="#80cbc4" stroke-width="0.8"/>
+    <text x="1000" y="484" font-size="11" fill="#1a1a1a">provider_ref</text>
+    <text x="1155" y="484" text-anchor="end" font-size="10" fill="#555">VARCHAR(255)</text>
+    <line x1="960" y1="490" x2="1160" y2="490" stroke="#80cbc4" stroke-width="0.8"/>
+    <text x="1000" y="506" font-size="11" fill="#1a1a1a">method</text>
+    <text x="1155" y="506" text-anchor="end" font-size="10" fill="#555">payment_method</text>
+    <line x1="960" y1="512" x2="1160" y2="512" stroke="#80cbc4" stroke-width="0.8"/>
+    <text x="1000" y="528" font-size="11" fill="#1a1a1a">amount</text>
+    <text x="1155" y="528" text-anchor="end" font-size="10" fill="#555">DECIMAL(10,2)</text>
+    <line x1="960" y1="534" x2="1160" y2="534" stroke="#80cbc4" stroke-width="0.8"/>
+    <text x="1000" y="550" font-size="11" fill="#1a1a1a">status</text>
+    <text x="1155" y="550" text-anchor="end" font-size="10" fill="#555">payment_status</text>
+    <line x1="960" y1="556" x2="1160" y2="556" stroke="#80cbc4" stroke-width="0.8"/>
+    <text x="1000" y="572" font-size="11" fill="#1a1a1a">paid_at</text>
+    <text x="1155" y="572" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <line x1="960" y1="578" x2="1160" y2="578" stroke="#80cbc4" stroke-width="0.8"/>
+    <text x="1000" y="594" font-size="11" fill="#1a1a1a">created_at</text>
+    <text x="1155" y="594" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <line x1="960" y1="600" x2="1160" y2="600" stroke="#80cbc4" stroke-width="0.8"/>
+    <text x="1000" y="616" font-size="11" fill="#1a1a1a">updated_at</text>
+    <text x="1155" y="616" text-anchor="end" font-size="10" fill="#555">TIMESTAMP</text>
+    <rect x="960" y="360" width="200" height="290" rx="6" ry="6" fill="none" stroke="#00695c" stroke-width="1.5"/>
+  </g>
+ 
+  <!-- ════════════════════════════════════════════ -->
+  <!--  RELATIONSHIP LINES                         -->
+  <!-- ════════════════════════════════════════════ -->
+ 
+  <!-- customers 1 → N carts (customer_id) -->
+  <line x1="140" y1="282" x2="140" y2="360" stroke="#4a90d9" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="148" y="325" font-size="10" fill="#4a90d9">1 : N</text>
+ 
+  <!-- customers 1 → N orders (customer_id) -->
+  <path d="M240 176 Q340 176 340 640 Q340 650 480 717" fill="none" stroke="#4a90d9" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow-blue)"/>
+  <text x="345" y="420" font-size="10" fill="#4a90d9">1 : N</text>
+ 
+  <!-- carts 1 → N cart_items (cart_id) -->
+  <line x1="240" y1="437" x2="480" y2="437" stroke="#4a90d9" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="340" y="430" font-size="10" fill="#4a90d9">1 : N</text>
+ 
+  <!-- products 1 → N cart_items (product_id) -->
+  <line x1="960" y1="176" x2="680" y2="463" stroke="#4a90d9" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="820" y="290" font-size="10" fill="#4a90d9">1 : N</text>
+ 
+  <!-- products 1 → N order_items (product_id) -->
+  <line x1="1060" y1="308" x2="860" y2="650" stroke="#4a90d9" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow-blue)"/>
+  <text x="990" y="500" font-size="10" fill="#4a90d9">1 : N</text>
+ 
+  <!-- carts 1 → N orders (cart_id) -->
+  <path d="M140" fill="none"/>
+  <line x1="140" y1="572" x2="140" y2="640 " stroke="#4a90d9" stroke-width="1.5"/>
+  <line x1="140" y1="640" x2="480" y2="743" stroke="#4a90d9" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="148" y="630" font-size="10" fill="#4a90d9">1 : N</text>
+ 
+  <!-- orders 1 → N order_items (order_id) -->
+  <line x1="680" y1="727" x2="760" y2="727" stroke="#4a90d9" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="700" y="720" font-size="10" fill="#4a90d9">1 : N</text>
+ 
+  <!-- orders 1 → 1 payments (order_id) -->
+  <path d="M680 717 Q820 630 960 437" fill="none" stroke="#4a90d9" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="820" y="580" font-size="10" fill="#4a90d9">1 : 1</text>
+ 
+ 
+</svg>
