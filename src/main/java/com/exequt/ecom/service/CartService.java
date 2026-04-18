@@ -29,7 +29,7 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final CartMapper cartMapper;
     private final OrderRepository orderRepository;
-    private final OrderFactory orderFactory;
+    private final OrderService orderService;
     private final ProductService productService;
 
 
@@ -93,7 +93,7 @@ public class CartService {
                     .customer(customer)
                     .status(CartStatus.ACTIVE)
                     .build();
-            cartRepository.save(newCart);
+            newCart = cartRepository.save(newCart);
             log.info("New cart created: cartId={}, customerId={}", newCart.getId(), customerId);
             return CartResponse.builder()
                     .cartId(newCart.getId())
@@ -168,7 +168,7 @@ public class CartService {
         }
     }
     @Transactional
-    public CheckoutResponse checkoutCart(Long cartId, Long userId) throws Exception {
+    public CheckoutResponse checkoutCart(Long cartId, Long userId, CheckoutRequest checkoutRequest) throws Exception {
         log.info("Checkout started: cartId={}, userId={}", cartId, userId);
         try {
             CartEntity cart = cartRepository.findById(cartId)
@@ -182,7 +182,8 @@ public class CartService {
             }
             cart.checkout();
             cartRepository.save(cart);
-            OrderEntity order = orderFactory.createFromCart(cart);
+            OrderEntity order = orderService.createFromCart(cart);
+            order.setShippingAddr(checkoutRequest.getShappingAddress());
             order = orderRepository.save(order);
             log.info("Order created: orderId={}, cartId={}", order.getId(), cartId);
             return CheckoutResponse.builder()

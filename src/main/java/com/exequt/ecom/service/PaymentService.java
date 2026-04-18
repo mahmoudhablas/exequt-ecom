@@ -5,6 +5,8 @@ import com.exequt.ecom.exception.InvalidOrderStateException;
 import com.exequt.ecom.exception.OrderNotFoundException;
 import com.exequt.ecom.exception.PaymentFailureException;
 import com.exequt.ecom.exception.PaymentNotFoundException;
+import com.exequt.ecom.exception.UnknowPaymentFailureException;
+import com.exequt.ecom.model.dto.PaymentRequest;
 import com.exequt.ecom.model.entity.OrderStatus;
 import com.exequt.ecom.model.dto.PaymentProviderCallback;
 import com.exequt.ecom.model.dto.PaymentProviderRequest;
@@ -16,6 +18,8 @@ import com.exequt.ecom.repository.PaymentRepository;
 import com.exequt.ecom.utils.Constants;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.net.http.HttpConnectTimeoutException;
 
 @Service
 @AllArgsConstructor
@@ -32,6 +36,10 @@ public class PaymentService {
             // Idempotent handling: if payment is already completed or failed, do nothing
             return;
         }
+        if(payment.getOrder().getStatus().equals(OrderStatus.CANCELLED)){
+            // insert into refund table.
+            return;
+        }
         // Update payment status
         if (Constants.PAYMENT_PROVIDER_STATUS.equalsIgnoreCase(paymentProviderCallback.getStatus())) {
             payment.setStatus(PaymentStatus.COMPLETED);
@@ -45,7 +53,7 @@ public class PaymentService {
         orderRepository.save(payment.getOrder());
     }
 
-    public void startProcessPayment(Long orderId) {
+    public void startProcessPayment(Long orderId, PaymentRequest paymentRequest) {
         // 1. Validate order exists and is in correct state
         OrderEntity order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new OrderNotFoundException(orderId));
@@ -73,11 +81,16 @@ public class PaymentService {
                             .paymentId(payment.getProviderRef())
                             .build()
             );
-        } catch (Exception e) {
+        }
+        catch (HttpConnectTimeoutException e) {
+            payment.setStatus(PaymentStatus.TIMEOUT); // it will be handled operationaly
+            paymentRepository.save(payment);
+            throw new UnknowPaymentFailureException();
+        }
+        catch (Exception e) {
             payment.setStatus(PaymentStatus.FAILED);
             paymentRepository.save(payment);
-            order.setStatus(OrderStatus.PAYMENT_FAILED);
-            orderRepository.save(order);
+
             throw new PaymentFailureException(e.getMessage(), e);
         }
         // 4. Mark as pending until callback

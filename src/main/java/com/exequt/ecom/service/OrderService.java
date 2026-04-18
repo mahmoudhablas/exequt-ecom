@@ -1,14 +1,35 @@
 package com.exequt.ecom.service;
 
+import com.exequt.ecom.exception.OrderNotFoundException;
 import com.exequt.ecom.model.entity.*;
+import com.exequt.ecom.repository.OrderRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-@Service
-public class OrderFactory {
+import static ch.qos.logback.classic.spi.ThrowableProxyVO.build;
 
+@Service
+@AllArgsConstructor
+public class OrderService {
+
+    private final OrderRepository orderRepository;
+
+    public void cancelOrder(Long orderId) {
+
+        OrderEntity order = this.orderRepository.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException(orderId));
+        if(order.getStatus() == OrderStatus.CANCELLED) {
+            throw new IllegalStateException("Order is already cancelled");
+        }
+        if(order.getStatus() == OrderStatus.CONFIRMED) {
+            throw new IllegalStateException("Completed order cannot be cancelled");
+        }
+        order.setStatus(OrderStatus.CANCELLED);
+        this.orderRepository.save(order);
+    }
     public OrderEntity createFromCart(CartEntity cart) {
 
         OrderEntity order = OrderEntity.builder()
@@ -18,6 +39,7 @@ public class OrderFactory {
                 .subtotal(calculateTotal(cart))
                 .total(calculateTotal(cart))
                 .items(new ArrayList<>())
+                .tax(BigDecimal.ZERO)
                 .build();
 
         for (CartItemEntity item : cart.getItems()) {

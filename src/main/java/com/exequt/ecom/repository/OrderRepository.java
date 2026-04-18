@@ -10,10 +10,6 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
-    // Single order scoped to customer — prevents accessing other customers' orders
-    Optional<OrderEntity> findByIdAndCustomerId(Long orderId, Long customerId);
-
-
     @EntityGraph(attributePaths = {"items", "items.product"})
     Optional<OrderEntity> findById(Long orderId);
 }

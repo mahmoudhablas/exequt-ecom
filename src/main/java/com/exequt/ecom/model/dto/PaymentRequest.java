@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CartRequest {
-    private List<CartItem> items;
+public class PaymentRequest {
+    private String accountNumber;
+    private String cardHolderName;
+
 }

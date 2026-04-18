@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class InternalPaymentProvider {
+public class ExternalPaymentProvider {
     @PostMapping("internal/v1/payments")
     public ResponseEntity<Void> simulateSuccessProcessPayment() {
         return ResponseEntity.noContent().build();
     }
+
 }
