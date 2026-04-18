@@ -1,0 +1,349 @@
+{
+  "info": {
+    "_postman_id": "5920a5a6-6dd0-4674-8c8b-b5b1d24d2e6c",
+    "name": "ECommerce App",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "15950822"
+  },
+  "item": [
+    {
+      "name": "Create Empty Cart or Get Active One",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "2",
+            "type": "text"
+          },
+          {
+            "key": "X-Correlation-Id",
+            "value": "5adadss",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/v1/carts",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "carts"
+          ],
+          "query": [
+            {
+              "key": "X-Correlation-Id",
+              "value": "156da6sd",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        },
+        "description": "Create Empty Cart or Get Existing Active One"
+      },
+      "response": []
+    },
+    {
+      "name": "Add Item to Active Cart",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "2",
+            "type": "text"
+          },
+          {
+            "key": "X-Correlation-Id",
+            "value": "2135646sa",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n   \"items\": [\r\n        {\r\n        \"productId\": 4,\r\n        \"quantity\": 2\r\n         },\r\n        {\r\n            \"productId\": 3,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}\r\n    \r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/v1/carts/5/items",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "carts",
+            "5",
+            "items"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Remove Items from Active Cart",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "1",
+            "type": "text"
+          },
+          {
+            "key": "X-Correlation-Id",
+            "value": "test64a",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "localhost:8080/v1/carts/1/items/4",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "carts",
+            "1",
+            "items",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Checkout",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "2",
+            "type": "text"
+          },
+          {
+            "key": "X-Correlation-Id",
+            "value": "sfadsad",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"shappingAddress\": \"Cairo\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/v1/carts/5/checkout",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "carts",
+            "5",
+            "checkout"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Webhook/Callback",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"paymentId\": \"dummy-ref-4\",\r\n    \"provider\": \"DUMMY_PROVIDER\",\r\n    \"status\": \"SUCCESS\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/v1/payments/webhook",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "payments",
+            "webhook"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View Cart Details",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "1",
+            "type": "text"
+          },
+          {
+            "key": "X-Correlation-Id",
+            "value": "afasfsaw",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"apiKey\": \"mahmoud\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/v1/carts/3",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "carts",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View Products",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"product 1\",\r\n    \"description\": \"description\",\r\n    \"price\": 12.5,\r\n    \"category\": \"general\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/v1/products?cursor=0&limit=10",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "products"
+          ],
+          "query": [
+            {
+              "key": "cursor",
+              "value": "0"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Correlation-Id",
+            "value": "46sadas",
+            "type": "text"
+          },
+          {
+            "key": "X-User-Id",
+            "value": "3",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"accountNumber\": \"54646546\",\r\n    \"cardHolderName\": \"Mahmoud\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/v1/orders/6/paymment/start",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "orders",
+            "6",
+            "paymment",
+            "start"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
